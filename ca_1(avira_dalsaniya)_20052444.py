@@ -100,7 +100,7 @@ CORS(app)
 
 @app.route('/get_jobs', methods=['GET'])
 def getJobsData(): # Name of the method
-  cursor.execute("SELECT * FROM jobdetails")
+  cursor.execute("SELECT * FROM jobsDetails")
   rows = cursor.fetchall()
   rows
   Results=[]
