@@ -5,29 +5,38 @@
 <meta name="viewport" content="width=device-width">
 <title>Test API Client</title>
 <script>
-let doIt=()=>{
-  let tab=document.getElementById("tab1");
-  let rows=tab1.getElementsByTagName('tr');
-  fetch('https://avira.uksouth.cloudapp.azure.com:8080/get_jobs')
+let doIt = () => {
+  let button = document.querySelector("button");
+  button.disabled = true; // Disable the button after the first click
+
+  let tab = document.getElementById("tab1");
+  let rows = tab.getElementsByTagName("tr");
+
+  fetch("https://avira.uksouth.cloudapp.azure.com:8080/get_jobs")
     .then(response => response.json())
-    .then(data=>data.Results.forEach(  //.slice(0,3)
-      x=>{
-        let newRow=rows[0].cloneNode(true);
-        let divs=newRow.getElementsByTagName('td');
-        divs[0].innerHTML=x['Job_Title'];
-        divs[1].innerHTML=x['Company_Name'];
-        divs[2].innerHTML=x['Company_Logo'];
-        divs[3].innerHTML=x['Location'];
-        divs[4].innerHTML=x['Salary Amount'];
-        divs[5].innerHTML=x['Pay Type'];
-        divs[6].innerHTML=x['Date_Posted'];
-        divs[7].innerHTML=x['Expiry_Date'];
-        divs[8].innerHTML=x['Job Status'];
-        tab1.appendChild(newRow);
-      }
+    .then(data => 
+      data.Results.forEach(
+        x => {
+          let newRow = rows[0].cloneNode(true);
+          let divs = newRow.getElementsByTagName("td");
+          divs[0].innerHTML = x["Job_Title"];
+          divs[1].innerHTML = x["Company_Name"];
+          divs[2].innerHTML = `<img src="${x['Company_Logo']}" alt="Logo" width="50">`; // Show the logo as an image
+          divs[3].innerHTML = x["Location"];
+          divs[4].innerHTML = x["Salary Amount"];
+          divs[5].innerHTML = x["Pay Type"];
+          divs[6].innerHTML = x["Date_Posted"];
+          divs[7].innerHTML = x["Expiry_Date"];
+          divs[8].innerHTML = x["Job Status"];
+          tab.appendChild(newRow);
+        }
+      )
     )
-  );
-}
+    .catch(error => {
+      console.error("Error fetching data:", error);
+      button.disabled = false; // Re-enable the button if there's an error
+    });
+};
 </script>
 </head>
 <body>
