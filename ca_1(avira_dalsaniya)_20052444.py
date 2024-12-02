@@ -128,5 +128,9 @@ def getJobsData(): # Name of the method
 def home():
     return "Test Flask is running!"
 
+@app.route("/job.html") #Default - Show Data
+def index(): # Name of the method
+    return render_template('job.html')
+
 if __name__ == "__main__":
   app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
