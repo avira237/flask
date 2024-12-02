@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Test API Client</title>
+<script>
+let doIt=()=>{
+  let tab=document.getElementById("tab1");
+  let rows=tab1.getElementsByTagName('tr');
+  fetch('https://avira.uksouth.cloudapp.azure.com:8080/')
+    .then(response => response.json())
+    .then(data=>data.Results.forEach(  //.slice(0,3)
+      x=>{
+        let newRow=rows[0].cloneNode(true);
+        let divs=newRow.getElementsByTagName('td');
+        divs[0].innerHTML=x['Job_Title'];
+        divs[1].innerHTML=x['Company_Name'];
+        divs[2].innerHTML=x['Company_Logo'];
+        divs[2].innerHTML=x['Location'];
+        divs[2].innerHTML=x['Salary Amount'];
+        divs[2].innerHTML=x['Pay Type'];
+        divs[2].innerHTML=x['Date_Posted'];
+        divs[2].innerHTML=x['Expiry_Date'];
+        divs[2].innerHTML=x['Job Status'];
+
+        tab1.appendChild(newRow);
+      }
+    )
+  );
+}
+</script>
+</head>
+<body>
+<button onClick="doIt()">Press me</button>
+This is where the results turn up: <br/>
+<table id='tab1' bgcolor='blue'>
+<tr><td>ID</td>
+    <td>Job_Title</td>
+    <td>Company_Name</td>
+    <td>Company_Logo</td>
+    <td>Location</td>
+    <td>Salary Amount</td>
+    <td>Pay Type</td>
+    <td>Date_Posted</td>
+    <td>Expiry_Date</td>
+    <td>Job Status</td>
+</tr>
+</table></body>
+</html>
