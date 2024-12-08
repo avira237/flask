@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Job Details</title>
+</head>
+<body>
+    <h2>Add Job Details</h2>
+    <form action="/job_add" method="POST">
+        <label for="Job_Title">Job Title:</label><br>
+        <input type="text" id="Job_Title" name="Job_Title" required><br><br>
+
+        <label for="Company_Name">Company Name:</label><br>
+        <input type="text" id="Company_Name" name="Company_Name" required><br><br>
+
+        <label for="Company_Logo">Company Logo URL:</label><br>
+        <input type="text" id="Company_Logo" name="Company_Logo"><br><br>
+
+        <label for="Location">Location:</label><br>
+        <input type="text" id="Location" name="Location" required><br><br>
+
+        <label for="Salary_Amount">Salary Amount:</label><br>
+        <input type="number" id="Salary_Amount" name="Salary_Amount" step="0.01" required><br><br>
+
+        <label for="Pay_Type">Pay Type:</label><br>
+        <select id="Pay_Type" name="Pay_Type">
+            <option value="Hourly">Hourly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+        </select><br><br>
+
+        <label for="Date_Posted">Date Posted:</label><br>
+        <input type="date" id="Date_Posted" name="Date_Posted" required><br><br>
+
+        <label for="Expiry_Date">Expiry Date:</label><br>
+        <input type="date" id="Expiry_Date" name="Expiry_Date"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

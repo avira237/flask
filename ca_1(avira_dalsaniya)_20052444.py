@@ -84,11 +84,11 @@ connection = sqlite3.connect('jobData.db',check_same_thread=False)
 
 cursor = connection.cursor()
 
-df.to_sql('jobsDetails', connection, if_exists='append', index=False)
+df.to_sql('jobsData', connection, if_exists='append', index=False)
 
-cursor.execute("SELECT * FROM jobsDetails")
+cursor.execute("SELECT * FROM jobsData")
 rows = cursor.fetchall()
-rows
+
 
 
 from flask import Flask, request, jsonify,render_template
@@ -100,7 +100,7 @@ CORS(app)
 
 @app.route('/get_jobs', methods=['GET'])
 def getJobsData(): # Name of the method
-  cursor.execute("SELECT * FROM jobsDetails")
+  cursor.execute("SELECT * FROM jobsData")
   rows = cursor.fetchall()
   rows
   Results=[]
@@ -124,6 +124,41 @@ def getJobsData(): # Name of the method
   )
   return ret #Return the data in a string format
 
+@app.route("/job_add", methods=['GET', 'POST']) #Add Student
+def job_add():
+  if request.method == 'POST':
+    Job_Title = request.form['Job_Title']
+    Company_Name = request.form['Company_Name']
+    Company_Logo = request.form['Company_Logo']
+    Location = request.form['Location']
+    Salary_Amount = request.form['Salary_Amount']
+    Pay_Type= request.form['Pay_Type']
+    Date_Posted=  request.form['Date_Posted']
+    Expiry_Date=  request.form['Expiry_Date']
+
+    # Determine job status
+    today = datetime.now().date()
+    date_posted = datetime.strptime(Date_Posted, '%Y-%m-%d').date()
+    expiry_date = datetime.strptime(Expiry_Date, '%Y-%m-%d').date() if Expiry_Date else None
+    if expiry_date and expiry_date < today:
+      Job_Status = 'Closed'
+      elif date_posted <= today:
+        Job_Status = 'Open'
+        else:
+          Job_Status = 'Closed'  # Handle cases where posted date is in the future
+
+    print(Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status)
+    cur = mysql.cursor() #create a connection to the SQL instance
+    s='''INSERT INTO jobsData(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''.format(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status)
+    app.logger.info(s)
+    cur.execute(s)
+    mysql.commit()
+  else:
+    return render_template('job_add.html')
+
+  return '{"Result":"Success"}'
+
+  
 @app.route('/')
 def home():
     return "Test Flask is running!"
