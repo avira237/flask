@@ -142,10 +142,10 @@ def job_add():
     expiry_date = datetime.strptime(Expiry_Date, '%Y-%m-%d').date() if Expiry_Date else None
     if expiry_date and expiry_date < today:
       Job_Status = 'Closed'
-      elif date_posted <= today:
-        Job_Status = 'Open'
-        else:
-          Job_Status = 'Closed'  # Handle cases where posted date is in the future
+    elif date_posted <= today:
+      Job_Status = 'Open'
+    else:
+      Job_Status = 'Closed'  # Handle cases where posted date is in the future
 
     print(Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status)
     cur = mysql.cursor() #create a connection to the SQL instance
