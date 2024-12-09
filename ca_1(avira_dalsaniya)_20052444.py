@@ -43,18 +43,18 @@ df
 df.columns
 
 df.rename(columns={
-    'title': 'Job Title',
-    'companyName': 'Company Name',
-    'companyLogo':'Company Logo',
+    'title': 'Job_Title',
+    'companyName': 'Company_Name',
+    'companyLogo':'Company_Logo',
     'location': 'Location',
-    'datePosted': 'Date Posted',
-    'dateExpire': 'Expiry Date',
+    'datePosted': 'Date_Posted',
+    'dateExpire': 'Expiry_Date',
 }, inplace=True)
 
-df['Date Posted'] = pd.to_datetime(df['Date Posted']).dt.strftime('%Y-%m-%d %H:%M:%S')
-df['Expiry Date'] = pd.to_datetime(df['Expiry Date']).dt.strftime('%Y-%m-%d %H:%M:%S')
+df['Date_Posted'] = pd.to_datetime(df['Date Posted']).dt.strftime('%Y-%m-%d %H:%M:%S')
+df['Expiry_Date'] = pd.to_datetime(df['Expiry Date']).dt.strftime('%Y-%m-%d %H:%M:%S')
 
-df['Job Status'] = df['Expiry Date'].apply(lambda x: 'Open' if pd.to_datetime(x) > pd.Timestamp.now() else 'Closed')
+df['Job_Status'] = df['Expiry_Date'].apply(lambda x: 'Open' if pd.to_datetime(x) > pd.Timestamp.now() else 'Closed')
 
 def process_salary(salary):
     import re
@@ -74,9 +74,9 @@ def process_salary(salary):
     return salary_amount, salary_type
 
 # Apply this function to your DataFrame
-df["Salary Amount"], df["Pay Type"] = zip(*df["salary"].apply(process_salary))
+df["Salary_Amount"], df["Pay_Type"] = zip(*df["salary"].apply(process_salary))
 
-df = df[['Job Title', 'Company Name', 'Company Logo','Location', 'Salary Amount','Pay Type', 'Date Posted', 'Expiry Date','Job Status']]
+df = df[['Job_Title', 'Company_Name', 'Company Logo','Location', 'Salary_Amount','Pay_Type', 'Date_Posted', 'Expiry_Date','Job_Status']]
 df
 
 import sqlite3
@@ -111,11 +111,11 @@ def getJobsData(): # Name of the method
     Result['Company_Name']=row[1]
     Result['Company_Logo']=row[2]
     Result['Location']=row[3]
-    Result['Salary Amount']=row[4]
-    Result['Pay Type']=row[5]
+    Result['Salary_Amount']=row[4]
+    Result['Pay_Type']=row[5]
     Result['Date_Posted']=row[6]
     Result['Expiry_Date']=row[7]
-    Result['Job Status']=row[8]
+    Result['Job_Status']=row[8]
     Results.append(Result)
   response={'Results':Results, 'count':len(Results)}
   ret=app.response_class(
