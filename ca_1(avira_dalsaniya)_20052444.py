@@ -149,7 +149,7 @@ def job_add():
       Job_Status = 'Closed'  # Handle cases where posted date is in the future
 
     print(Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status)
-    s='''INSERT INTO JobDetails(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''
+    s='''INSERT INTO JobDetails(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'''
     cursor.execute(s, (Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status))
     connection.commit()  # Use connection.commit() to save changes
   else:
