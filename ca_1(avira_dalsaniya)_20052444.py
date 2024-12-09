@@ -10,6 +10,7 @@ Original file is located at
 import requests
 import json
 import pandas as pd
+from datetime import datetime
 
 url='https://www.jobs.ie/membersarea/api/recommendedjobs?count=20'
 
@@ -154,7 +155,7 @@ def job_add():
     cur.execute(s)
     mysql.commit()
   else:
-    return render_template('job_add.html')
+    return render_template('jobs_add.html')
 
   return '{"Result":"Success"}'
 
