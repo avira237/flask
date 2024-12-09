@@ -51,8 +51,8 @@ df.rename(columns={
     'dateExpire': 'Expiry_Date',
 }, inplace=True)
 
-df['Date_Posted'] = pd.to_datetime(df['Date Posted']).dt.strftime('%Y-%m-%d %H:%M:%S')
-df['Expiry_Date'] = pd.to_datetime(df['Expiry Date']).dt.strftime('%Y-%m-%d %H:%M:%S')
+df['Date_Posted'] = pd.to_datetime(df['Date_Posted']).dt.strftime('%Y-%m-%d %H:%M:%S')
+df['Expiry_Date'] = pd.to_datetime(df['Expiry_Date']).dt.strftime('%Y-%m-%d %H:%M:%S')
 
 df['Job_Status'] = df['Expiry_Date'].apply(lambda x: 'Open' if pd.to_datetime(x) > pd.Timestamp.now() else 'Closed')
 
