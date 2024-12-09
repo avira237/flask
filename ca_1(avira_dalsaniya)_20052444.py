@@ -149,11 +149,9 @@ def job_add():
       Job_Status = 'Closed'  # Handle cases where posted date is in the future
 
     print(Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status)
-    cur = mysql.cursor() #create a connection to the SQL instance
-    s='''INSERT INTO jobsData(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''.format(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status)
-    app.logger.info(s)
-    cur.execute(s)
-    mysql.commit()
+    s='''INSERT INTO jobsData(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''
+    cursor.execute(query, (Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status))
+    connection.commit()  # Use connection.commit() to save changes
   else:
     return render_template('jobs_add.html')
 
