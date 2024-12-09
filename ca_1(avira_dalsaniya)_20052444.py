@@ -168,8 +168,7 @@ def index(): # Name of the method
     return render_template('job.html')
 
 
-
-@app.route("/job_add.html") #Default - Show Data
+@app.route("/jobs_add.html") #Default - Show Data
 def index(): # Name of the method
     return render_template('job_add.html')
 
