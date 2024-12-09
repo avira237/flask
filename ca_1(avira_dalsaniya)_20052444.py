@@ -76,7 +76,7 @@ def process_salary(salary):
 # Apply this function to your DataFrame
 df["Salary_Amount"], df["Pay_Type"] = zip(*df["salary"].apply(process_salary))
 
-df = df[['Job_Title', 'Company_Name', 'Company Logo','Location', 'Salary_Amount','Pay_Type', 'Date_Posted', 'Expiry_Date','Job_Status']]
+df = df[['Job_Title', 'Company_Name', 'Company_Logo','Location', 'Salary_Amount','Pay_Type', 'Date_Posted', 'Expiry_Date','Job_Status']]
 df
 
 import sqlite3
