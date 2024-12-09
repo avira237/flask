@@ -85,9 +85,9 @@ connection = sqlite3.connect('jobData.db',check_same_thread=False)
 
 cursor = connection.cursor()
 
-df.to_sql('jobsData', connection, if_exists='append', index=False)
+df.to_sql('JobDetails', connection, if_exists='append', index=False)
 
-cursor.execute("SELECT * FROM jobsData")
+cursor.execute("SELECT * FROM JobDetails")
 rows = cursor.fetchall()
 
 
@@ -101,7 +101,7 @@ CORS(app)
 
 @app.route('/get_jobs', methods=['GET'])
 def getJobsData(): # Name of the method
-  cursor.execute("SELECT * FROM jobsData")
+  cursor.execute("SELECT * FROM JobDetails")
   rows = cursor.fetchall()
   rows
   Results=[]
@@ -149,7 +149,7 @@ def job_add():
       Job_Status = 'Closed'  # Handle cases where posted date is in the future
 
     print(Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status)
-    s='''INSERT INTO jobsData(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''
+    s='''INSERT INTO JobDetails(Job_Title,Company_Name,Company_Logo,Location,Salary_Amount,Pay_Type,Date_Posted,Expiry_Date,Job_Status) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''
     cursor.execute(s, (Job_Title, Company_Name, Company_Logo, Location, Salary_Amount, Pay_Type, Date_Posted, Expiry_Date, Job_Status))
     connection.commit()  # Use connection.commit() to save changes
   else:
